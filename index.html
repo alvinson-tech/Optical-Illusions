@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mind Blowing Optical Illusions</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
@@ -314,6 +315,14 @@
             font-weight: 300;
         }
 
+        .answer-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
         .answer-content.show {
             display: block;
             animation: fadeIn 0.3s ease;
@@ -371,18 +380,64 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 769px) {
             .container {
-                padding: 15px;
+                max-width: 600px; /* Reduced from 800px */
             }
+            
+            .card-inner {
+                max-width: 600px; /* Reduced from 800px */
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Header adjustments */
+            .brand {
+                font-size: 0.9em;
+                padding: 15px 5px 5px 5px;
+            }
+
+            .header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
             .header h1 {
-                font-size: 2.5em;
+                font-size: 2em; /* Reduced from 2.5em */
             }
+
             .header p {
-                font-size: 1.2em;
+                font-size: 1em; /* Reduced from 1.2em */
             }
-            .card {
-                padding: 10px;
+
+            /* Music player adjustments */
+            .music-player {
+                top: 15px;
+                right: 15px;
+            }
+
+            .music-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Card content text adjustments */
+            .card-inner h2 {
+                font-size: 1.2em; /* Reduced from 1.4em */
+            }
+
+            .card-inner h3 {
+                font-size: 0.8em; /* Reduced from 0.9em */
+            }
+
+            .answer-content {
+                font-size: 0.85em; /* Reduced from 0.95em */
+                padding: 12px;
+            }
+
+            .answer-btn {
+                font-size: 0.75em; /* Reduced from 0.8em */
+                padding: 5px 12px;
             }
         }
     </style>
