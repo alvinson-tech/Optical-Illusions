@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mind Blowing Optical Illusions</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lexend', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            background-image: linear-gradient(30deg, #f0f2f5 12%, transparent 12.5%, transparent 87%, #f0f2f5 87.5%, #f0f2f5),
+            linear-gradient(150deg, #f0f2f5 12%, transparent 12.5%, transparent 87%, #f0f2f5 87.5%, #f0f2f5),
+            linear-gradient(30deg, #f0f2f5 12%, transparent 12.5%, transparent 87%, #f0f2f5 87.5%, #f0f2f5),
+            linear-gradient(150deg, #f0f2f5 12%, transparent 12.5%, transparent 87%, #f0f2f5 87.5%, #f0f2f5),
+            linear-gradient(60deg, #e3e7eb 25%, transparent 25.5%, transparent 75%, #e3e7eb 75%, #e3e7eb),
+            linear-gradient(60deg, #e3e7eb 25%, transparent 25.5%, transparent 75%, #e3e7eb 75%, #e3e7eb);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            height: 100vh;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        .brand {
+            text-align: center;
+            padding: 20px 5px 5px 5px;
+            font-size: 1em;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;  /* Changed to inline-block */
+            background: linear-gradient(135deg, #1a1a1a 0%, #404040 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Add position relative for proper containment */
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .music-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .music-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #10b981;
+        }
+
+        .song-popup {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+            color: #666;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .song-popup.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.05) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .card {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            padding: 20px;
+        }
+
+        .card-inner {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card-inner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .card-header {
+            padding: 20px 20px 15px 20px;
+        }
+
+        .card-inner h2 {
+            color: #1a1a1a;
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .card-inner h3 {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 300;
+        }
+
+        .next-card-arrow {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto 0;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .next-card-arrow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border-right: 3px solid #10b981;
+            border-bottom: 3px solid #10b981;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .next-card-arrow:hover {
+            transform: translateY(5px);
+        }
+
+        /* Show arrow when answer is visible */
+        .answer-content.show + .next-card-arrow {
+            display: block;
+        }
+
+        .image-container {
+            width: 100%;
+            position: relative;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 16px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        .video-container.playing .play-button {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .card-footer {
+            padding: 15px 15px 25px;
+            text-align: center;
+        }
+
+        .answer-btn {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .answer-content {
+            display: none;
+            margin: 15px auto;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.5;
+            max-width: 90%;
+            font-weight: 300;
+        }
+
+        .answer-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Styles for the ending message */
+        .ending-message {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.9));
+            scroll-snap-align: start;
+            /* Added rounded corners */
+            border-radius: 20px;
+            margin: 0 20px;
+        }
+
+        .ending-message h2 {
+            /* Reduced from 2em to 1.8em */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .ending-message p {
+            color: #666;
+            /* Reduced from 1.1em to 1em */
+            font-size: 1em;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .ending-message .emoji {
+            /* Reduced from 2.5em to 2.2em */
+            font-size: 2.2em;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .header p {
+                font-size: 1.2em;
+            }
+            .card {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="brand">
+        alvin.fun
+    </div>
+
+    <div class="music-player">
+        <button class="music-btn" id="musicToggle" aria-label="Toggle music">
+            <svg viewBox="0 0 24 24" class="play-icon">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg viewBox="0 0 24 24" class="pause-icon" style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+    </div>
+    <div class="song-popup" id="songPopup">
+        Now Playing: Kids - Stranger Things
+    </div>
+
+    <div class="header">
+        <h1>Mind Blowing Optical Illusions</h1>
+        <p>Challenge your perception with these fascinating visual puzzles</p>
+    </div>
+
+    <div class="container" id="illusions-container">
+        <!-- Cards will be generated here -->
+    </div>
+
+    <script>
+        const illusions = [
+            {
+                id: 1,
+                title: "Elephant's Legs",
+                subtitle: "How many legs does the elephant have?",
+                image: "images/1.jpg",
+                answer: {
+                    type: "text",
+                    content: "Well, no one's really sure about this one till date!!"
+                }
+            },
+            {
+                id: 2,
+                title: "Dancing Girl",
+                subtitle: "Is the middle dancer spinning clockwise or counterclockwise? The answer is both.",
+                image: "images/2.mp4",
+                answer: {
+                    type: "text",
+                    content: "By staring at either the left or right dancer, you can change the direction the middle dancer spins!"
+                }
+            },
+            {
+                id: 3,
+                title: "Blocks",
+                subtitle: "These yellow and blue blocks appear to move one after the other, right?",
+                image: "images/3.mp4",
+                answer: {
+                    type: "text",
+                    content: "When the black bars are removed, you’ll see that they’re always parallel and that the black bars are distorting your brain’s perception of movement."
+                }
+            },
+            {
+                id: 4,
+                title: "Light Bulb",
+                subtitle: "Stare the at the bulb for 25 seconds, and then blink at a white wall or paper.",
+                image: "images/4.jpg",
+                answer: {
+                    type: "text",
+                    content: "You should see the bulb glow!"
+                }
+            },
+            {
+                id: 5,
+                title: "Hidden Image",
+                subtitle: "Cross your eyes and then look at this picture!",
+                image: "images/5.jpg",
+                answer: {
+                    type: "text",
+                    content: "We all know who that is!"
+                }
+            },
+            {
+                id: 6,
+                title: "Hidden Text",
+                subtitle: "Cross your eyes again and have a look. Did you get that?",
+                image: "images/6.jpg",
+                answer: {
+                    type: "text",
+                    content: "Thats rite, 'HIDE AND SEEK'. It indeed is well hidden!"
+                }
+            },
+            {
+                id: 7,
+                title: "Cars",
+                subtitle: "These cars look like they’re different sizes… Or are they!?",
+                image: "images/7a.jpg",
+                answer: {
+                    type: "image",
+                    content: "7b.gif"
+                }
+            },
+            {
+                id: 8,
+                title: "Circles",
+                subtitle: "Which orange circle looks bigger?",
+                image: "images/8a.jpg",
+                answer: {
+                    type: "image",
+                    content: "8b.jpg"
+                }
+            },
+            {
+                id: 9,
+                title: "Suspicious Dots",
+                subtitle: "All the dots on this image are white, but some appear black.",
+                image: "images/9.jpg",
+                answer: {
+                    type: "text",
+                    content: "No matter how hard you try, you won’t be able to look directly at the black dots that appear in the circles. Why this illusion works is still a mystery."
+                }
+            },
+            {
+                id: 10,
+                title: "Lines",
+                subtitle: "The red lines are bent. Wait are they?",
+                image: "images/10.jpg",
+                answer: {
+                    type: "text",
+                    content: "The red lines are straight and parallel to each other."
+                }
+            },
+            {
+                id: 11,
+                title: "Dancing Dots",
+                subtitle: "These dots seem to change color and orbit the center. But focus your eyes on a single dot",
+                image: "images/11.gif",
+                answer: {
+                    type: "text",
+                    content: "There’s no rotating or color change at all."
+                }
+            },
+            {
+                id: 12,
+                title: "Hidden Arc",
+                subtitle: "The Arc looks soo not aligned!",
+                image: "images/12.png",
+                answer: {
+                    type: "text",
+                    content: "Well, It is actually perfect! Look Closely, by imagining the pole not being in place!"
+                }
+            },
+            {
+                id: 13,
+                title: "Scary Lady? Not Really!",
+                subtitle: "Stare at this lady’s nose for 10 seconds, then blink rapidly while looking at a light surface.",
+                image: "images/13.jpg",
+                answer: {
+                    type: "text",
+                    content: "Her face appears very well."
+                }
+            },
+            {
+                id: 14,
+                title: "Lines",
+                subtitle: "Which line looks longer?",
+                image: "images/14.jpg",
+                answer: {
+                    type: "text",
+                    content: "Both are equal in length! Try it with a ruler if your mind is still playing tricks on you!"
+                }
+            },
+            {
+                id: 15,
+                title: "Motion Images",
+                subtitle: "Akiyoshi Kitaoka uses geometrical shapes, brightness and color to create motion illusions.",
+                image: "images/15.jpg",
+                answer: {
+                    type: "text",
+                    content: "These images are not animated, but the human brain makes them appear so."
+                }
+            },
+            {
+                id: 16,
+                title: "Still Moving!?",
+                subtitle: "Using similar techniques, Randolph is able to create similar, more psychedelic illusions.",
+                image: "images/16.jpg",
+                answer: {
+                    type: "text",
+                    content: "These images are not animated, but the human brain makes them appear so."
+                }
+            },
+            {
+                id: 17,
+                title: "Face Mask?",
+                subtitle: "This looks like a face mask, but look closer…",
+                image: "images/17.jpg",
+                answer: {
+                    type: "text",
+                    content: "It’s actually an image of two people kissing – not a single person’s face."
+                }
+            },
+            {
+                id: 18,
+                title: "Bright or Dim Lights?",
+                subtitle: "Move your head towards and away from the image! Notice anything?",
+                image: "images/18.jpg",
+                answer: {
+                    type: "text",
+                    content: "Move your head towards image and the light in the middle will get brighter. Move your head away and the light will become weaker."
+                }
+            },
+            {
+                id: 19,
+                title: "Horizontal or Parallel Lines?",
+                subtitle: "These horizontal lines appear to be sloping, but look long enough, and you’ll see that they’re parallel to one another.",
+                image: "images/19.jpg",
+                answer: {
+                    type: "text",
+                    content: "Initially, it’s difficult to see the grey line between white and black tiles, meaning that the brain fills in the grey as either black or white, creating the illusion that the lines are sloped."
+                }
+            },
+            {
+                id: 20,
+                title: "Pretty Women",
+                subtitle: "At first, they look like 3 attractive women… But try flipping the image!",
+                image: "images/20a.jpg",
+                answer: {
+                    type: "image",
+                    content: "20b.jpg"
+                }
+            },
+            {
+                id: 21,
+                title: "Still or a Motion Picture?",
+                subtitle: "Stare at the yellow dot. Then, move your head closer to the screen and the pink rings will rotate.",
+                image: "images/21.jpg",
+                answer: {
+                    type: "text",
+                    content: "The Pinna-Brelstaff illusion occurs because of flaws in peripheral vision."
+                }
+            },
+            {
+                id: 22,
+                title: "Circles Overlapping with each other?",
+                subtitle: "These overlapping circles are actually perfectly round and don’t touch at all – can you see past the illusion?",
+                image: "images/22a.jpg",
+                answer: {
+                    type: "image",
+                    content: "22b.jpg"
+                }
+            },
+            {
+                id: 23,
+                title: "Hidden Circle?",
+                subtitle: "Stare at the cross in the center and watch the blank spot.",
+                image: "images/23.gif",
+                answer: {
+                    type: "text",
+                    content: "Did you see the hidden light-blue circle?"
+                }
+            },
+            {
+                id: 24,
+                title: "Trains",
+                subtitle: "Which way is this train moving?",
+                image: "images/24.gif",
+                answer: {
+                    type: "text",
+                    content: "This is part of the 'wagon-wheel effect'. Closing your eyes for a second then opening them or looking in the direction you want the train to travel, should allow you to switch directions on command."
+                }
+            },
+            {
+                id: 25,
+                title: "Mysterious Hallway",
+                subtitle: "Looks pretty normal rite, Check the Answer!",
+                image: "images/25.gif",
+                answer: {
+                    type: "text",
+                    content: "Cover the sides of the hallway with your hands and the animation speeds down, cover the middle and the animation speeds up."
+                }
+            }
+        ];
+
+        // Music player functionality
+        const musicBtn = document.getElementById('musicToggle');
+        const songPopup = document.getElementById('songPopup');
+        const playIcon = musicBtn.querySelector('.play-icon');
+        const pauseIcon = musicBtn.querySelector('.pause-icon');
+        const audio = new Audio('Kids - Stranger Things.mp3');
+
+        audio.volume = 0.3;
+        
+        let popupTimeout;
+
+        musicBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                showPopup();
+            } else {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        });
+
+        function showPopup() {
+            songPopup.classList.add('show');
+            
+            // Clear any existing timeout
+            if (popupTimeout) {
+                clearTimeout(popupTimeout);
+            }
+            
+            // Set new timeout to hide popup after 3 seconds
+            popupTimeout = setTimeout(() => {
+                songPopup.classList.remove('show');
+            }, 3000);
+        }
+
+        // Handle audio loop
+        audio.addEventListener('ended', () => {
+            audio.currentTime = 0;
+            audio.play();
+        });
+
+        const container = document.getElementById('illusions-container');
+        const progressBar = document.getElementById('progressBar');
+
+        function createCard(illusion) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const cardInner = document.createElement('div');
+            cardInner.className = 'card-inner';
+            
+            // Check if the image is a video
+            const isVideo = illusion.image.toLowerCase().endsWith('.mp4');
+            
+            const mediaHTML = isVideo ? 
+                `<div class="video-container">
+                    <video width="100%" loop muted playsinline poster="${illusion.poster || ''}">
+                        <source src="${illusion.image}" type="video/mp4">
+                    </video>
+                    <div class="play-button"></div>
+                </div>` :
+                `<img src="${illusion.image}" alt="${illusion.title}">`;
+
+            cardInner.innerHTML = `
+                <div class="card-header">
+                    <h2>${illusion.title}</h2>
+                    <h3>${illusion.subtitle}</h3>
+                </div>
+                <div class="image-container">
+                    ${mediaHTML}
+                </div>
+                <div class="card-footer">
+                    <button class="answer-btn">Show Answer</button>
+                    <div class="answer-content">
+                        ${illusion.answer.type === 'text' ? 
+                            illusion.answer.content : 
+                            `<img src="images/${illusion.answer.content}" alt="Answer">`
+                        }
+                    </div>
+                </div>
+            `;
+
+            const cardFooter = cardInner.querySelector('.card-footer');
+            const arrowDiv = document.createElement('div');
+            arrowDiv.className = 'next-card-arrow';
+            arrowDiv.addEventListener('click', () => {
+                // Get the next card
+                const nextCard = card.nextElementSibling;
+                if (nextCard) {
+                    nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+            
+            cardFooter.appendChild(arrowDiv);
+
+            // Handle video play/pause functionality
+            if (isVideo) {
+                const videoContainer = cardInner.querySelector('.video-container');
+                const video = videoContainer.querySelector('video');
+                
+                videoContainer.addEventListener('click', function() {
+                    if (video.paused) {
+                        video.play();
+                        videoContainer.classList.add('playing');
+                    } else {
+                        video.pause();
+                        videoContainer.classList.remove('playing');
+                    }
+                });
+
+                // Reset video and button when video ends
+                video.addEventListener('ended', function() {
+                    video.currentTime = 0;
+                    video.play();  // Auto replay since it's a loop
+                });
+            }
+
+            const btn = cardInner.querySelector('.answer-btn');
+            const answerContent = cardInner.querySelector('.answer-content');
+
+            btn.addEventListener('click', () => {
+                answerContent.classList.toggle('show');
+                btn.textContent = answerContent.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+            });
+
+            card.appendChild(cardInner);
+            return card;
+        }
+
+        // Create cards for all illusions in the array
+        illusions.forEach(illusion => {
+            container.appendChild(createCard(illusion));
+        });
+
+        const endingMessage = document.createElement('div');
+        endingMessage.className = 'ending-message';
+        endingMessage.innerHTML = `
+            <div class="emoji">🎭</div>
+            <h2>Thanks for exploring with us!</h2>
+            <p>Your brain just tackled some wild optical illusions.
+            Swing by again for more mind-bending fun — we’re always cooking up new tricks for your eyes!</p>
+        `;
+        container.appendChild(endingMessage);
+
+        // Update progress bar on scroll
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+        });
+    </script>
+</body>
+</html>
